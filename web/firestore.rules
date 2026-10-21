@@ -1,0 +1,24 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // ฟอร์ม "ติดต่อ / ขอใบเสนอราคา" — ผู้เยี่ยมชมสร้างได้อย่างเดียว อ่าน/แก้/ลบไม่ได้
+    // ดูข้อมูลผ่าน Firebase console หรือเชื่อมต่อส่งอีเมลด้วย Trigger Email extension
+    match /inquiries/{id} {
+      allow create: if request.resource.data.keys().hasOnly(['name', 'org', 'phone', 'message', 'lang', 'createdAt'])
+        && request.resource.data.name is string
+        && request.resource.data.name.size() > 0 && request.resource.data.name.size() <= 120
+        && request.resource.data.phone is string
+        && request.resource.data.phone.matches('^[-0-9+() ]{6,20}$')
+        && request.resource.data.org is string && request.resource.data.org.size() <= 160
+        && request.resource.data.message is string && request.resource.data.message.size() <= 3000
+        && request.resource.data.lang in ['th', 'en']
+        && request.resource.data.createdAt == request.time;
+      allow read, update, delete: if false;
+    }
+
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}
