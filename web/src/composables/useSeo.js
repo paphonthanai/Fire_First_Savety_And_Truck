@@ -7,6 +7,7 @@ import { SITE_URL, EMAIL } from '../content/site.js'
 const KEYWORDS = 'รถดับเพลิง, อุปกรณ์ดับเพลิง, เครื่องดับเพลิง, ถังดับเพลิง, รถกู้ภัย, ฝึกอบรมดับเพลิง, ซ้อมแผนอพยพหนีไฟ, ตรวจถังดับเพลิง, เครื่องสูบน้ำดับเพลิง, ชุดผจญเพลิง, นนทบุรี, fire truck Thailand, fire extinguisher'
 
 const abs = (p) => SITE_URL + p
+const OG_VERSION = '2'
 
 /** JSON-LD LocalBusiness — ข้อมูล NAP ต้องตรงกับ footer / หน้าติดต่อ / Google Business Profile */
 export function localBusiness(c, lang) {
@@ -23,7 +24,7 @@ export function localBusiness(c, lang) {
     email: EMAIL,
     taxID: '0125567038118',
     image: abs('/img/company.jpg'),
-    logo: abs('/img/company.jpg'),
+    logo: abs('/img/logo-512.png'),
     address: {
       '@type': 'PostalAddress',
       streetAddress: '48/68 ม.2 ต.ไทรน้อย',
@@ -66,6 +67,10 @@ export function useSeo(extraLd) {
     }
     if (extraLd) ld.push(...extraLd({ c: c.value, lang: lang.value, url }))
 
+    // การ์ดแชร์ลิงก์แยกหน้า/ภาษา (สร้างด้วย npm run og) — เปลี่ยน OG_VERSION เมื่อสร้างภาพใหม่ เพื่อให้ Facebook/LINE ดึงภาพใหม่
+    const ogImage = abs(`/img/og/${page.value}-${lang.value}.jpg?v=${OG_VERSION}`)
+    const ogAlt = `${c.value.legal} — ${s.t}`
+
     return {
       htmlAttrs: { lang: lang.value },
       title: s.t,
@@ -80,16 +85,21 @@ export function useSeo(extraLd) {
         { property: 'og:title', content: s.t },
         { property: 'og:description', content: s.d },
         { property: 'og:url', content: url },
-        { property: 'og:image', content: abs('/img/og-image.jpg') },
+        { property: 'og:image', content: ogImage },
+        { property: 'og:image:secure_url', content: ogImage },
+        { property: 'og:image:type', content: 'image/jpeg' },
         { property: 'og:image:width', content: '1200' },
         { property: 'og:image:height', content: '630' },
+        { property: 'og:image:alt', content: ogAlt },
         { name: 'twitter:card', content: 'summary_large_image' },
         { name: 'twitter:title', content: s.t },
         { name: 'twitter:description', content: s.d },
-        { name: 'twitter:image', content: abs('/img/og-image.jpg') },
+        { name: 'twitter:image', content: ogImage },
+        { name: 'twitter:image:alt', content: ogAlt },
       ],
       link: [
         { rel: 'canonical', href: url },
+        { rel: 'apple-touch-icon', href: '/img/apple-touch-icon.png' },
         { rel: 'alternate', hreflang: 'th', href: abs(pagePath(page.value, 'th')) },
         { rel: 'alternate', hreflang: 'en', href: abs(pagePath(page.value, 'en')) },
         { rel: 'alternate', hreflang: 'x-default', href: abs(pagePath(page.value, 'th')) },

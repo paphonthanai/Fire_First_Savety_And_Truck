@@ -36,6 +36,18 @@ public/img/                 รูป (jpg + webp), วิดีโอ, og-image
 firestore.rules             อนุญาตเฉพาะ "สร้าง" เอกสารใน inquiries พร้อมตรวจรูปแบบข้อมูล
 ```
 
+## การ์ดแชร์ลิงก์ (Open Graph)
+
+แต่ละหน้า/ภาษามีภาพการ์ด 1200×630 ของตัวเองที่ `public/img/og/{page}-{lang}.jpg`
+สร้างจากข้อความใน `ff-content.js` + รูปใน `public/img` ด้วย Chrome/Edge headless:
+
+```bash
+npm run og
+```
+
+หลังสร้างใหม่ ให้เพิ่มเลข `OG_VERSION` ใน `src/composables/useSeo.js` แล้ว commit
+(Facebook/LINE แคชภาพตาม URL) และกด "Scrape Again" ที่ https://developers.facebook.com/tools/debug/
+
 ## Responsive
 
 - ≥1024px: เมนูซ้าย (rail) ตามดีไซน์
