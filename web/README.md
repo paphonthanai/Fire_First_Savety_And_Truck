@@ -51,13 +51,27 @@ firestore.rules             อนุญาตเฉพาะ "สร้าง" 
 4. `npm i -g firebase-tools && firebase login`
 5. `npm run deploy` (build + deploy hosting และ firestore rules)
 
+โดเมน: https://firefirstsafetyandtruck.com (ตั้งใน `.env.production` → `VITE_SITE_URL`)
+
+## Deploy อัตโนมัติ (GitHub Actions)
+
+`.github/workflows/deploy.yml` จะ build + deploy ทุกครั้งที่ push เข้า `main` (เฉพาะเมื่อไฟล์ใน `web/` เปลี่ยน)
+หรือกดรันเองได้ที่แท็บ Actions → Deploy to Firebase → Run workflow
+
+ตั้งค่าครั้งเดียว:
+1. Firebase console → Project settings → Service accounts → **Generate new private key** (ได้ไฟล์ .json)
+   หรือสร้าง service account ใน Google Cloud IAM ที่มี role *Firebase Hosting Admin*, *Firebase Rules Admin*,
+   *Cloud Datastore Index Admin* และ *Service Usage Consumer*
+2. GitHub repo → Settings → Secrets and variables → Actions → **New repository secret**
+   ชื่อ `FIREBASE_SERVICE_ACCOUNT` วางเนื้อหาไฟล์ .json ทั้งหมด
+3. ลบไฟล์ .json ออกจากเครื่องเมื่อใส่ secret แล้ว (ห้าม commit)
+
 คำขอจากฟอร์มจะอยู่ใน collection `inquiries` (ดูได้ใน Firebase console)
 ถ้าต้องการแจ้งเตือนทางอีเมล ติดตั้ง extension **Trigger Email from Firestore** หรือเขียน Cloud Function
 ที่ trigger เมื่อมีเอกสารใหม่ แนะนำเปิด **App Check** (reCAPTCHA v3) กันสแปมเพิ่มจาก honeypot
 
 ## สิ่งที่รอข้อมูลจากลูกค้า (มี TODO ในโค้ด)
 
-- โดเมนจริง (`VITE_SITE_URL`) — ตอนนี้ใช้ `firefirstsafety.co.th` เป็นตัวอย่าง
 - ราคาจริง, รีวิวจริง (ลบป้าย "ข้อความตัวอย่าง"), ยืนยันบริการ 24/7
 - ตัวสะกดชื่อกรรมการผู้จัดการภาษาอังกฤษ, ไฟล์โลโก้ vector, รูปผลงานแบบไม่มีตัวอักษร
 - วันที่เผยแพร่วิดีโอ (`uploadDate` ใน HomePage.vue)

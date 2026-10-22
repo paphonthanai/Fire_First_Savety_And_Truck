@@ -6,7 +6,7 @@ import { PAGES, pagePath } from './src/content/routes.js'
 
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd(), '')
-  const site = (env.VITE_SITE_URL || 'https://www.firefirstsafety.co.th').replace(/\/$/, '')
+  const site = (env.VITE_SITE_URL || 'https://firefirstsafetyandtruck.com').replace(/\/$/, '')
 
   return {
     plugins: [vue()],

@@ -1,4 +1,4 @@
-export const SITE_URL = (import.meta.env.VITE_SITE_URL || 'https://www.firefirstsafety.co.th').replace(/\/$/, '')
+export const SITE_URL = (import.meta.env.VITE_SITE_URL || 'https://firefirstsafetyandtruck.com').replace(/\/$/, '')
 export const PHONE = '080-254-4306'
 export const PHONE_TEL = 'tel:+66802544306'
 export const EMAIL = 'firefirstsafetyandtruck@gmail.com'
