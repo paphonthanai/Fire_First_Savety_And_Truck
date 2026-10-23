@@ -1,0 +1,9 @@
+{
+  "name": "@sitekit/import-ff",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "@sitekit/schema": "*"
+  }
+}

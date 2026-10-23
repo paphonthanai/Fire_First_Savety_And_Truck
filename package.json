@@ -1,0 +1,21 @@
+{
+  "name": "sitekit",
+  "private": true,
+  "type": "module",
+  "workspaces": [
+    "packages/*",
+    "tools/*"
+  ],
+  "scripts": {
+    "test": "node --test \"packages/*/test/*.test.ts\" \"tools/*/test/*.test.ts\"",
+    "typecheck": "tsc -p tsconfig.json",
+    "import:ff": "node tools/import-ff/src/cli.ts"
+  },
+  "engines": {
+    "node": ">=22.18"
+  },
+  "devDependencies": {
+    "@types/node": "^22.20.5",
+    "typescript": "^5.9.3"
+  }
+}
