@@ -1,4 +1,5 @@
 <script setup>
+import FfImg from '../components/FfImg.vue'
 import { useSite } from '../composables/useSite.js'
 import { useSeo } from '../composables/useSeo.js'
 
@@ -28,6 +29,25 @@ useSeo()
       <h3 class="fleet__t">{{ f.t }}</h3>
       <p class="fleet__d">{{ f.d }}</p>
     </article>
+  </section>
+
+  <section class="pad-x cat-head">
+    <h2 class="sub-h">{{ c.h.catalog }}</h2>
+    <p class="cat-head__note">{{ c.h.catalogNote }}</p>
+  </section>
+  <section v-for="g in c.catalog" :id="`catalog-${g.id}`" :key="g.id" class="cat">
+    <h3 class="cat__h"><span>{{ g.c }}</span><small>{{ g.items.length }}</small></h3>
+    <div class="cat__grid">
+      <article v-for="p in g.items" :key="p.img" class="cat-card">
+        <div class="cat-card__img">
+          <FfImg :name="`products/${p.img}`" :alt="p.t" cover />
+        </div>
+        <h4 class="cat-card__t">{{ p.t }}</h4>
+        <ul class="cat-card__f">
+          <li v-for="x in p.f" :key="x">{{ x }}</li>
+        </ul>
+      </article>
+    </div>
   </section>
 
   <section class="pad rule">
