@@ -37,6 +37,8 @@ export function localBusiness(c, lang) {
     makesOffer: [
       { '@type': 'Offer', itemOffered: { '@type': 'Product', name: 'รถดับเพลิงและรถกู้ภัย' } },
       { '@type': 'Offer', itemOffered: { '@type': 'Product', name: 'เครื่องดับเพลิงและอุปกรณ์ดับเพลิง' } },
+      { '@type': 'Offer', itemOffered: { '@type': 'Product', name: 'อุปกรณ์จราจรและป้ายเตือน' } },
+      { '@type': 'Offer', itemOffered: { '@type': 'Product', name: 'ไฟกระพริบและไฟถนนโซล่าเซลล์' } },
       { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'ฝึกอบรมดับเพลิงและซ้อมแผน' } },
       { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'ตรวจสอบและบำรุงรักษาถังดับเพลิง' } },
     ],
